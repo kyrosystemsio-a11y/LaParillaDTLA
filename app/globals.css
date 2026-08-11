@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  /* Adobe Plaster — the warm plaster wall of the 1905 Wilshire house. */
+  --color-plaster: #f0e4c3;
+  --color-plaster-deep: #e4d4ac;
+  /* Reel Black — sepia-warm black, film stills and cast iron. */
+  --color-ink: #241e15;
+  /* Basalt Green — the volcanic molcajete stone. Primary accent. */
+  --color-basalt: #37453d;
+  --color-basalt-dark: #232c27;
+  /* Ember Brick — the comal's coals. Secondary accent, used sparingly. */
+  --color-ember: #a63a2c;
+  --color-ember-dark: #7e2b20;
+  /* Marigold Picado — dyed tissue paper. Tertiary accent, small details only. */
+  --color-marigold: #d9a23b;
+  /* Chaplin Silver — sepia-muted grey for hairlines and quiet text. */
+  --color-silver: #8f8672;
+
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-work-sans);
+  --font-utility: var(--font-space-mono);
+}
+
+@theme inline {
+  --color-plaster: var(--color-plaster);
+  --color-plaster-deep: var(--color-plaster-deep);
+  --color-ink: var(--color-ink);
+  --color-basalt: var(--color-basalt);
+  --color-basalt-dark: var(--color-basalt-dark);
+  --color-ember: var(--color-ember);
+  --color-ember-dark: var(--color-ember-dark);
+  --color-marigold: var(--color-marigold);
+  --color-silver: var(--color-silver);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-utility: var(--font-utility);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--color-plaster);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-ember);
+  color: var(--color-plaster);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ember);
+  outline-offset: 3px;
+}
+
+/* Perforated ticket edge — the site's one signature motif. Used only on
+   menu category dividers and the story spotlight, never decoratively. */
+.ticket-edge {
+  position: relative;
+}
+.ticket-edge::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 9px;
+  background-image: radial-gradient(
+    circle at 12px 0,
+    transparent 5px,
+    var(--color-plaster) 5.5px
+  );
+  background-size: 24px 9px;
+  background-repeat: repeat-x;
+}
