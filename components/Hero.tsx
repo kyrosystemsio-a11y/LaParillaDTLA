@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-ink/10">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:py-20">
-        <div className="order-2 lg:order-1">
+        <div className="hero-enter order-2 lg:order-1">
           <p className="font-utility text-xs uppercase tracking-[0.2em] text-ember">
             Los Angeles, since 1978
           </p>

@@ -83,3 +83,25 @@ export const images = {
     height: 900,
   },
 } as const satisfies Record<string, ImageSlot>;
+
+// Per-location image assignments, keyed by location slug. Components look
+// imagery up through here rather than branching on slug themselves, so adding
+// or re-photographing a location never means editing a component.
+const locationImageMap: Record<string, { card: ImageSlot; hero: ImageSlot }> = {
+  "boyle-heights": {
+    card: images.exteriorBoyleHeights,
+    hero: images.heroBoyleHeights,
+  },
+  wilshire: {
+    card: images.exteriorWilshire,
+    hero: images.heroWilshireBuilding,
+  },
+};
+
+// Returns undefined for an unmapped slug rather than substituting another
+// location's photograph — showing the wrong restaurant is worse than showing
+// none. `generateStaticParams` only builds known slugs, so this is a guard,
+// not an expected path.
+export function getLocationImages(slug: string): { card: ImageSlot; hero: ImageSlot } | undefined {
+  return locationImageMap[slug];
+}

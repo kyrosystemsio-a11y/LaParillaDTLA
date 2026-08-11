@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLocationBySlug, getVisibleLocations } from "@/content/locations";
 import { StatusBadge } from "@/components/StatusBadge";
 import { HoursBlock } from "@/components/HoursBlock";
+import { Amenities } from "@/components/Amenities";
+import { BuildingNote } from "@/components/BuildingNote";
 import { Button } from "@/components/Button";
 import { JsonLd } from "@/components/JsonLd";
 import { locationSchema } from "@/lib/schema";
-import { images } from "@/content/images";
+import { getLocationImages } from "@/content/images";
 
 export function generateStaticParams() {
   return getVisibleLocations().map((l) => ({ slug: l.slug }));
@@ -23,7 +26,7 @@ export async function generateMetadata({
   if (!location) return {};
   return {
     title: location.shortName,
-    description: `${location.name} — ${location.address.street}, ${location.address.city}, ${location.address.state}. ${location.phone}.`,
+    description: location.metaDescription,
     alternates: { canonical: `/locations/${location.slug}` },
   };
 }
@@ -38,7 +41,7 @@ export default async function LocationPage({
   if (!location) notFound();
 
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.mapsQuery)}`;
-  const image = location.slug === "wilshire" ? images.heroWilshireBuilding : images.heroBoyleHeights;
+  const image = getLocationImages(location.slug)?.hero;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
@@ -59,17 +62,28 @@ export default async function LocationPage({
             <p>
               {location.address.city}, {location.address.state} {location.address.zip}
             </p>
-            {location.neighborhood && (
+            {/* Skipped when it just repeats the page title, as it does for
+                Boyle Heights. */}
+            {location.neighborhood && location.neighborhood !== location.shortName && (
               <p className="mt-1 text-sm text-ink/70">{location.neighborhood}</p>
             )}
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          {/* Call and Directions stay the prominent pair; the menu is a
+              subordinate link so three buttons don't compete for the same
+              attention. */}
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-3">
             <Button href={`tel:${location.phoneHref}`}>Call {location.phone}</Button>
             <Button href={mapsHref} variant="ghost">
               Directions
             </Button>
           </div>
+          <Link
+            href="/menu"
+            className="mt-4 inline-flex min-h-[44px] items-center font-utility text-xs uppercase tracking-widest text-basalt underline underline-offset-4 hover:text-ember"
+          >
+            See the menu →
+          </Link>
 
           <div className="mt-8">
             <HoursBlock location={location} />
@@ -82,15 +96,25 @@ export default async function LocationPage({
           )}
         </div>
 
-        <div className="relative aspect-[4/3] w-full overflow-hidden">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
+        <div className="flex flex-col gap-8">
+          {image && (
+            <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          )}
+
+          {/* The building story belongs where someone is deciding whether to
+              come to this specific address, not only on /about. */}
+          {location.slug === "wilshire" && <BuildingNote />}
+
+          <Amenities />
         </div>
       </div>
     </div>

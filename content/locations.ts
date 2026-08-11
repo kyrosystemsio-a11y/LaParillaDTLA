@@ -30,6 +30,10 @@ export interface Location {
   hoursSourceNote: string;
   mariachi: boolean;
   story: string;
+  // Search-result copy for this location's detail page. Verified facts only —
+  // and never hours, and never anything implying an 'unconfirmed' location is
+  // currently open.
+  metaDescription: string;
   mapsQuery: string;
 }
 
@@ -61,8 +65,13 @@ export const locations: Location[] = [
     ],
     hoursSourceNote: "Per Yelp, updated June 2026.",
     mariachi: true,
+    // Card blurb. Deliberately leaves mariachi out — the location page renders
+    // that separately off the `mariachi` flag, and saying it in both places
+    // reads as padding.
     story:
-      "The original house. Open since 1978, still run by the same family, still bringing the mariachi through the dining room.",
+      "The original location, run by the same family since 1978.",
+    metaDescription:
+      "La Parrilla in Boyle Heights — the original, family-owned since 1978. Molcajetes, parrilladas, and handmade tortillas on Cesar E Chavez Ave, Los Angeles. Call (323) 262-3434.",
     mapsQuery: "2126 E Cesar E Chavez Ave, Los Angeles, CA 90033",
   },
   {
@@ -94,8 +103,17 @@ export const locations: Location[] = [
     ],
     hoursSourceNote: "Per Yelp, Aug 2026 — withheld pending owner confirmation.",
     mariachi: false,
+    // Card blurb. Carries no hours message — HoursBlock owns that, and it
+    // renders directly beneath this on both the card and the location page.
+    // Carries no geography either; the address and `neighborhood` above say it.
+    // The building's specifics belong to BuildingNote and StoryTeaser.
     story:
-      "A 1905 house on what was once Orange Street, one of the oldest buildings standing on Wilshire Boulevard and a recognized Legacy Business. Call ahead — hours here have been changing.",
+      "The family's second location, in a building with more history than the restaurant.",
+    // The search result is the first thing most people see, so the caution
+    // that the page carries has to be in here too — not just on the page.
+    // Status is 'unconfirmed': this must not read as an open restaurant.
+    metaDescription:
+      "La Parrilla on Wilshire — the family's second Mexican restaurant, in a 1905 building in Westlake, Los Angeles. Molcajetes and parrilladas. Hours here have been changing; call ahead before you go.",
     mapsQuery: "1300 Wilshire Blvd, Los Angeles, CA 90017",
   },
 ];

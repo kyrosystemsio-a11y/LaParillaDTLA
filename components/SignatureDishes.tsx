@@ -36,7 +36,7 @@ export function SignatureDishes() {
       </div>
       <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {dishes.map((d) => (
-          <div key={d.name}>
+          <div key={d.name} className="reveal">
             <div className="relative aspect-square w-full overflow-hidden">
               <Image
                 src={d.image.src}

@@ -57,8 +57,8 @@ export function Footer() {
       </div>
 
       <div className="mx-auto mt-10 max-w-6xl px-4 font-utility text-xs text-ink/70 sm:px-6">
-        © {new Date().getFullYear()} La Parrilla. Hours and details on this site are
-        confirmed with each location — call ahead for the latest.
+        © {new Date().getFullYear()} La Parrilla. Hours and details can change —
+        call the location you&apos;re visiting to be sure.
       </div>
     </footer>
   );

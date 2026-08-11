@@ -4,7 +4,6 @@ import { restaurant } from "@/content/restaurant";
 import { images } from "@/content/images";
 import { ChaplinSpotlight } from "@/components/ChaplinSpotlight";
 import { Button } from "@/components/Button";
-import { getVisibleLocations } from "@/content/locations";
 
 export const metadata: Metadata = {
   title: "Our story",
@@ -14,8 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const anchor = getVisibleLocations().find((l) => l.isOriginal);
-
   return (
     <div>
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-2 lg:items-center lg:gap-16">
@@ -38,11 +35,9 @@ export default function AboutPage() {
               prep sheet.
             </p>
           </div>
-          {anchor && (
-            <div className="mt-8">
-              <Button href="/locations">Visit us</Button>
-            </div>
-          )}
+          <div className="mt-8">
+            <Button href="/locations">Find a location</Button>
+          </div>
         </div>
 
         <div className="relative aspect-[4/5] w-full overflow-hidden">
@@ -57,16 +52,10 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* The page ends on the Chaplin band. A closing "here are our addresses"
+          section was navigation boilerplate the footer already covers — the
+          hero carries the CTA instead. */}
       <ChaplinSpotlight />
-
-      <div className="mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 sm:py-20">
-        <h2 className="font-display text-3xl text-ink sm:text-4xl">Two rooms, one kitchen&apos;s worth of heart</h2>
-        <p className="mt-4 font-body text-ink/70">
-          Boyle Heights is where it started. Wilshire came next, in{" "}
-          {restaurant.founded.wilshire}, into a building with more history
-          than the restaurant itself. Both are still family-run.
-        </p>
-      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { SignatureDishes } from "@/components/SignatureDishes";
-import { ChaplinSpotlight } from "@/components/ChaplinSpotlight";
+import { StoryTeaser } from "@/components/StoryTeaser";
 import { LocationCard } from "@/components/LocationCard";
 import { Button } from "@/components/Button";
 import { JsonLd } from "@/components/JsonLd";
@@ -28,11 +28,14 @@ export default function Home() {
 
       <Hero />
       <SignatureDishes />
-      <ChaplinSpotlight />
+      <StoryTeaser />
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
-        <h2 className="font-display text-4xl text-ink sm:text-5xl">Two rooms, one family</h2>
-        <p className="mt-3 max-w-2xl font-body text-base text-ink/70">{restaurant.founded.note}</p>
+        <h2 className="font-display text-4xl text-ink sm:text-5xl">Where to find us</h2>
+        <p className="mt-3 max-w-2xl font-body text-base text-ink/70">
+          Two addresses in Los Angeles. Hours vary — call ahead if you&apos;re
+          making the trip.
+        </p>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {locations.map((loc) => (
             <LocationCard key={loc.slug} location={loc} />

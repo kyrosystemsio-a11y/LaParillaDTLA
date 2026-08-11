@@ -12,6 +12,11 @@ export interface MenuCategory {
   slug: string;
   name: string;
   note?: string;
+  /**
+   * Marks a house-defining section for slightly heavier visual treatment.
+   * Keep this to a genuine few — if most categories are signature, none are.
+   */
+  signature?: boolean;
   items: MenuItem[];
 }
 
@@ -84,6 +89,7 @@ export const menu: MenuCategory[] = [
     slug: "mary-carmen-creations",
     name: "Mary Carmen Creations",
     note: "Molcajetes — served hot, straight from the stone.",
+    signature: true,
     items: [
       { name: "Molcajete Azteca", description: "For two.", price: "$35.95" },
       {
@@ -100,6 +106,7 @@ export const menu: MenuCategory[] = [
     slug: "parrilladas-brasero",
     name: "Parrilladas Brasero",
     note: "Mixed grills for two.",
+    signature: true,
     items: [
       {
         name: "Brasero 1",
