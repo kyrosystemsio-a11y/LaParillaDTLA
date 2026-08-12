@@ -9,7 +9,11 @@ import { site } from "@/content/site";
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  axes: ["opsz", "SOFT", "WONK"],
+  // `opsz` is kept deliberately: `font-optical-sizing: auto` is the CSS default,
+  // so the browser applies it already and removing it changes the display
+  // letterforms. SOFT and WONK were requested but never set anywhere, so they
+  // were pure payload.
+  axes: ["opsz"],
   fallback: ["Georgia", "serif"],
 });
 
@@ -22,7 +26,8 @@ const workSans = Work_Sans({
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  // 400 only — nothing on the site renders the utility face bold.
+  weight: ["400"],
   fallback: ["ui-monospace", "monospace"],
 });
 
@@ -56,7 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-plaster text-ink">
         <Header />
-        <main className="flex-1 pb-16 md:pb-0">{children}</main>
+        <main className="flex-1 pb-16 lg:pb-0">{children}</main>
         <Footer />
         <MobileActionBar />
       </body>

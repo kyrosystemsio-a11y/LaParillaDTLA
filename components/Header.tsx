@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { nav } from "@/content/site";
-import { getVisibleLocations } from "@/content/locations";
+import { getAnchorLocation } from "@/content/locations";
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const anchor = getVisibleLocations()[0];
+  const anchor = getAnchorLocation();
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink/10 bg-plaster/95 backdrop-blur">

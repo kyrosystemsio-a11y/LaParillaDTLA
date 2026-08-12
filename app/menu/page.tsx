@@ -5,7 +5,7 @@ import { buildMenuRows } from "@/lib/menu-layout";
 import { MenuNav } from "@/components/MenuNav";
 import { MenuSection } from "@/components/MenuSection";
 import { Button } from "@/components/Button";
-import { getVisibleLocations } from "@/content/locations";
+import { getAnchorLocation } from "@/content/locations";
 
 export const metadata: Metadata = {
   title: "Menu",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function MenuPage() {
-  const anchor = getVisibleLocations().find((l) => l.isOriginal);
+  const anchor = getAnchorLocation();
   const rows = buildMenuRows(menu);
 
   return (

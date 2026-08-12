@@ -125,3 +125,21 @@ export function getVisibleLocations(): Location[] {
 export function getLocationBySlug(slug: string): Location | undefined {
   return locations.find((l) => l.slug === slug && l.status !== "closed");
 }
+
+/**
+ * The location that site-wide "call us" actions should point at.
+ *
+ * Prefers the original location, and only falls back to a location whose hours
+ * we cannot confirm if there is genuinely nothing else open. Every component
+ * that needs a default phone number must use this, so a status change can
+ * never leave one call site advertising an `unconfirmed` location while the
+ * others point elsewhere.
+ */
+export function getAnchorLocation(): Location | undefined {
+  const visible = getVisibleLocations();
+  return (
+    visible.find((l) => l.isOriginal) ??
+    visible.find((l) => l.status === "open") ??
+    visible[0]
+  );
+}

@@ -20,6 +20,61 @@ export interface MenuCategory {
   items: MenuItem[];
 }
 
+/** How a featured dish borrows its price from the menu, rather than restating it. */
+export type PriceRef =
+  | { kind: "item"; name: string }
+  | { kind: "categoryFrom"; slug: string };
+
+export interface FeaturedDish {
+  name: string;
+  blurb: string;
+  /** Key into `content/images.ts`. */
+  imageKey: "molcajete" | "brasero" | "comal" | "guacamole";
+  /**
+   * Omit when the dish has no menu entry to price against. An omitted ref
+   * renders no price at all — we never invent one.
+   */
+  priceRef?: PriceRef;
+}
+
+/**
+ * The four dishes featured on the home page. Names, blurbs and selection are
+ * owner-approved copy — do not add, remove, substitute or reword them here.
+ * Prices are deliberately absent: they resolve from `menu` below via
+ * `lib/featured-price.ts`, so a price exists in exactly one place.
+ */
+export const featured: FeaturedDish[] = [
+  {
+    name: "Molcajete del Señor Pancho Villa",
+    blurb:
+      "Chicken, beef, shrimp, panela cheese, and cactus, in a hot stone molcajete with a bucket of four Coronitas.",
+    imageKey: "molcajete",
+    priceRef: { kind: "item", name: "Molcajete del Señor Pancho Villa" },
+  },
+  {
+    name: "Parrilladas Brasero",
+    blurb: "Mixed grills for two — off the fire, straight to the table.",
+    imageKey: "brasero",
+    priceRef: { kind: "categoryFrom", slug: "parrilladas-brasero" },
+  },
+  {
+    name: "Handmade tortillas",
+    blurb: "Made to order, on the comal.",
+    imageKey: "comal",
+    // No menu entry — tortillas are not sold as a listed item. No price shown.
+  },
+  {
+    name: "Fresh guacamole",
+    blurb: "Made fresh, not from a tub.",
+    imageKey: "guacamole",
+    // TODO(owner-verification): guacamole is featured on the home page but has
+    // no entry anywhere in `menu` below. Either the menu data is incomplete or
+    // the dish should not be featured. Left exactly as published pending the
+    // owner's answer — do NOT resolve this by inventing a menu item or a price,
+    // and do NOT substitute another dish.
+  },
+];
+
 export const menu: MenuCategory[] = [
   {
     slug: "to-start",

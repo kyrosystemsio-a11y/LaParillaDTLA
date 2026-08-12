@@ -1,15 +1,18 @@
 import Image from "next/image";
 import { images } from "@/content/images";
 import { Button } from "@/components/Button";
-import { getVisibleLocations } from "@/content/locations";
+import { getAnchorLocation } from "@/content/locations";
 
 export function Hero() {
-  const anchor = getVisibleLocations().find((l) => l.isOriginal);
+  const anchor = getAnchorLocation();
 
   return (
     <section className="relative overflow-hidden border-b border-ink/10">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:py-20">
-        <div className="hero-enter order-2 lg:order-1">
+        {/* Text leads below `lg`. Previously the image came first at every
+            width, which pushed the headline and both CTAs out of the first
+            viewport from 391px all the way to 1023px. The H1 is unchanged. */}
+        <div className="hero-enter order-1">
           <p className="font-utility text-xs uppercase tracking-[0.2em] text-ember">
             Los Angeles, since 1978
           </p>
@@ -32,8 +35,11 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="order-1 lg:order-2">
-          <div className="relative aspect-[4/5] w-full overflow-hidden">
+        <div className="order-2">
+          {/* Wider crop below `lg` so a full-width image cannot consume the
+              fold on phones and tablets; the tall 4:5 crop returns once the
+              hero is two columns. */}
+          <div className="relative aspect-[3/2] w-full overflow-hidden sm:aspect-[16/9] lg:aspect-[4/5]">
             <Image
               src={images.heroBoyleHeights.src}
               alt={images.heroBoyleHeights.alt}

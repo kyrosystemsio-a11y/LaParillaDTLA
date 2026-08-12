@@ -70,9 +70,15 @@ body {
   color: var(--color-plaster);
 }
 
+/* Two-tone focus ring. No single colour in the palette clears 3:1 against all
+   three section backgrounds — ember reads on plaster (5.08) but not on ink
+   (2.57) or basalt (1.57), while a light ring is the reverse. So the ember
+   ring carries light sections and the plaster halo just outside it carries the
+   dark ones (13.05 on ink, 7.97 on basalt). One rule, valid everywhere. */
 :focus-visible {
   outline: 3px solid var(--color-ember);
-  outline-offset: 3px;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--color-plaster);
 }
 
 /* ---------------------------------------------------------------------------
