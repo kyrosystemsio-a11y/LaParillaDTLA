@@ -7,11 +7,24 @@ import { MenuSection } from "@/components/MenuSection";
 import { Button } from "@/components/Button";
 import { getAnchorLocation } from "@/content/locations";
 
+const MENU_DESCRIPTION =
+  "Molcajetes, parrilladas, seafood, street tacos, and more — the full La Parrilla menu, Los Angeles.";
+
 export const metadata: Metadata = {
   title: "Menu",
-  description:
-    "Molcajetes, parrilladas, seafood, street tacos, and more — the full La Parrilla menu, Los Angeles.",
+  description: MENU_DESCRIPTION,
   alternates: { canonical: "/menu" },
+  // Without these the page inherited the root layout's OpenGraph block, so a
+  // shared menu link previewed as the home page and advertised the home page
+  // URL. `images` has to be restated: declaring `openGraph` on a segment
+  // detaches the root opengraph-image file, which would otherwise leave this
+  // page with no share image at all.
+  openGraph: {
+    title: "Menu — La Parrilla",
+    description: MENU_DESCRIPTION,
+    url: "/menu",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function MenuPage() {
@@ -39,7 +52,9 @@ export default function MenuPage() {
           collapses back to the sticky horizontal bar and everything is one
           column — the mobile reading experience is unchanged. */}
       <div className="mx-auto mt-6 max-w-6xl px-4 sm:px-6 lg:mt-10 lg:grid lg:grid-cols-[190px_1fr] lg:items-start lg:gap-14">
-        <MenuNav categories={menu} />
+        {/* The bar section lives outside the `menu` data but is a section on
+            this page, so it belongs in the jump nav. */}
+        <MenuNav categories={menu} extraLinks={[{ href: "#bar", label: barInfo.name }]} />
 
         <div>
           {rows.map((row) => (

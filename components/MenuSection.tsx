@@ -46,7 +46,7 @@ export function MenuSection({
             }`}
           >
             <div className="flex-1">
-              <div className="flex items-baseline gap-2">
+              <div className="flex flex-wrap items-baseline gap-x-2">
                 <span className="font-body text-base font-medium text-ink">{item.name}</span>
                 {item.signature && (
                   <span className="font-utility text-[10px] uppercase tracking-widest text-ember">
@@ -64,9 +64,14 @@ export function MenuSection({
                 invent a price or a stand-in label for it. */}
             {item.price && (
               <>
+                {/* The leader is a desktop device only. Below `lg` it took an
+                    equal `flex-1` share against the dish name, so a decorative
+                    rule was winning width from content — the signature dish was
+                    left 76px of name against a 134px leader and wrapped to four
+                    lines. Hidden below `lg`, the name takes that width back. */}
                 <span
                   aria-hidden="true"
-                  className="flex-1 translate-y-[-4px] border-b border-dotted border-ink/20"
+                  className="hidden translate-y-[-4px] border-b border-dotted border-ink/20 lg:block lg:flex-1"
                 />
                 <span className="whitespace-nowrap font-utility text-sm text-ink">
                   {item.price}
