@@ -25,10 +25,20 @@ export function HoursBlock({ location }: { location: Location }) {
         </p>
       )}
       <table className="w-full font-utility text-sm">
+        {/* Names the table for screen readers without changing anything on
+            screen — otherwise a visitor hears "table" with no indication of
+            which location's hours these are. */}
+        <caption className="sr-only">
+          Opening hours for {location.name}
+        </caption>
         <tbody>
           {location.hours.map((h) => (
             <tr key={h.day} className="border-b border-ink/10 last:border-none">
-              <td className="py-1.5 pr-4 text-ink/70">{h.day}</td>
+              {/* scope="row" associates each time with its day. As plain <td>
+                  cells the two had no programmatic relationship. */}
+              <th scope="row" className="py-1.5 pr-4 text-left font-normal text-ink/70">
+                {h.day}
+              </th>
               <td className="py-1.5 text-right text-ink">
                 {h.open && h.close ? `${h.open} – ${h.close}` : "Closed"}
               </td>

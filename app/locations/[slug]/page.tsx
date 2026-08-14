@@ -28,6 +28,17 @@ export async function generateMetadata({
     title: location.shortName,
     description: location.metaDescription,
     alternates: { canonical: `/locations/${location.slug}` },
+    // Without these the page inherited the root layout's OpenGraph block, so a
+    // shared location link previewed as the home page and advertised the home
+    // page URL — the worst place for that, since an address is exactly what
+    // people paste into a message. `images` has to be restated: declaring
+    // `openGraph` on a segment detaches the root opengraph-image file.
+    openGraph: {
+      title: `${location.shortName} — La Parrilla`,
+      description: location.metaDescription,
+      url: `/locations/${location.slug}`,
+      images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+    },
   };
 }
 

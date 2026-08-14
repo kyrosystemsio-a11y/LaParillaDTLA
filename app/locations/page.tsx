@@ -4,10 +4,24 @@ import { LocationCard } from "@/components/LocationCard";
 import { JsonLd } from "@/components/JsonLd";
 import { locationSchema } from "@/lib/schema";
 
+const LOCATIONS_DESCRIPTION =
+  "Find La Parrilla in Boyle Heights and on Wilshire in Los Angeles.";
+
 export const metadata: Metadata = {
   title: "Locations",
-  description: "Find La Parrilla in Boyle Heights and on Wilshire in Los Angeles.",
+  description: LOCATIONS_DESCRIPTION,
   alternates: { canonical: "/locations" },
+  // Without these the page inherited the root layout's OpenGraph block, so a
+  // shared link previewed as the home page and advertised the home page URL.
+  // `images` has to be restated: declaring `openGraph` on a segment detaches
+  // the root opengraph-image file, which would leave this page with no share
+  // image at all.
+  openGraph: {
+    title: "Locations — La Parrilla",
+    description: LOCATIONS_DESCRIPTION,
+    url: "/locations",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function LocationsPage() {
