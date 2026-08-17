@@ -5,11 +5,25 @@ import { images } from "@/content/images";
 import { ChaplinSpotlight } from "@/components/ChaplinSpotlight";
 import { Button } from "@/components/Button";
 
+const ABOUT_DESCRIPTION =
+  "Family-owned since 1978. The story of La Parrilla, from Boyle Heights to a 1905 house on Wilshire.";
+
 export const metadata: Metadata = {
   title: "Our story",
-  description:
-    "Family-owned since 1978. The story of La Parrilla, from Boyle Heights to a 1905 house on Wilshire.",
+  description: ABOUT_DESCRIPTION,
   alternates: { canonical: "/about" },
+  // Without these the page inherited the root layout's OpenGraph block, so a
+  // shared link to the story previewed as the home page and advertised the
+  // home page URL — the worst place for that, since this page carries the
+  // Chaplin story and is the most forwarded thing on the site. `images` has to
+  // be restated: declaring `openGraph` on a segment detaches the root
+  // opengraph-image file, which would leave this page with no share image.
+  openGraph: {
+    title: "Our story — La Parrilla",
+    description: ABOUT_DESCRIPTION,
+    url: "/about",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function AboutPage() {

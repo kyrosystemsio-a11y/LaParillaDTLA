@@ -7,8 +7,13 @@ import { Button } from "@/components/Button";
 import { StatusBadge } from "@/components/StatusBadge";
 import { getAnchorLocation, getVisibleLocations } from "@/content/locations";
 
+// Lists only the channels the page actually offers. While
+// `cateringEmailVerified` is false the email CTA is suppressed, so promising
+// email in the search snippet advertised a contact method no visitor could
+// find — the same dead-end the gate exists to prevent. Add it back here at the
+// same time the address is verified, not before.
 const CATERING_DESCRIPTION =
-  "Catering inquiries for La Parrilla — call, email, or DM to talk through your event.";
+  "Catering inquiries for La Parrilla — call or DM to talk through your event.";
 
 export const metadata: Metadata = {
   title: "Catering",
