@@ -4,16 +4,33 @@ import { restaurant } from "@/content/restaurant";
 import { images } from "@/content/images";
 import { social } from "@/content/social";
 import { Button } from "@/components/Button";
-import { getVisibleLocations } from "@/content/locations";
+import { getAnchorLocation, getVisibleLocations } from "@/content/locations";
+
+const CATERING_DESCRIPTION =
+  "Catering inquiries for La Parrilla — call, email, or DM to talk through your event.";
 
 export const metadata: Metadata = {
   title: "Catering",
-  description: "Catering inquiries for La Parrilla — call, email, or DM to talk through your event.",
+  description: CATERING_DESCRIPTION,
   alternates: { canonical: "/catering" },
+  // Without these the page inherited the root layout's OpenGraph block, so a
+  // shared catering link previewed as the home page and advertised the home
+  // page URL — and a forwarded link is how most catering inquiries start.
+  // `images` has to be restated: declaring `openGraph` on a segment detaches
+  // the root opengraph-image file, which would leave this page with no share
+  // image at all.
+  openGraph: {
+    title: "Catering — La Parrilla",
+    description: CATERING_DESCRIPTION,
+    url: "/catering",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function CateringPage() {
   const locations = getVisibleLocations();
+  // Same shared rule every other "call us" action on the site uses.
+  const anchor = getAnchorLocation();
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
@@ -28,11 +45,23 @@ export default function CateringPage() {
             and what you&apos;re after, and we&apos;ll work out the rest with
             you directly.
           </p>
+          {/* Phone leads because the copy above says it is the fastest way to
+              reach us — it previously sat 494px below the fold at 390px while
+              an unverified email address held the primary slot. The number
+              comes from the anchor location, never hardcoded. Email returns
+              automatically once `cateringEmailVerified` flips to true. */}
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href={`mailto:${restaurant.cateringEmailPlaceholder}`}>Email us</Button>
+            {anchor && (
+              <Button href={`tel:${anchor.phoneHref}`}>Call {anchor.phone}</Button>
+            )}
             <Button href={social.instagramBrand.url} variant="ghost">
               DM on Instagram
             </Button>
+            {restaurant.cateringEmailVerified && (
+              <Button href={`mailto:${restaurant.cateringEmailPlaceholder}`} variant="ghost">
+                Email us
+              </Button>
+            )}
           </div>
         </div>
         <div className="relative aspect-[4/3] w-full overflow-hidden">

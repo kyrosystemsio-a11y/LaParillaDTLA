@@ -86,6 +86,12 @@ export const restaurant = {
   cateringNote:
     "Catering is available. The fastest way to reach us is by phone, or send a DM on Instagram.",
   cateringEmailPlaceholder: "catering@laparrillala.com", // placeholder — owner to supply real address
+  // The address above is a stand-in, not a working inbox. While this is false
+  // the catering page renders no email CTA at all — an inquiry sent to an
+  // address that does not exist is lost silently, which is worse than offering
+  // no email. Set to true only once the owner supplies a real address (replace
+  // the placeholder above at the same time); the CTA returns with no code change.
+  cateringEmailVerified: false,
   signatureItems: [
     "Molcajete del Señor Pancho Villa",
     "Parrilladas Brasero mixed grills",
