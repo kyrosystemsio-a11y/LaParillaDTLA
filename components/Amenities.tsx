@@ -16,7 +16,11 @@ export function Amenities() {
         id="amenities-heading"
         className="font-utility text-xs uppercase tracking-widest text-ink/70"
       >
-        Good to know — both locations
+        {/* "both locations" claimed exactly the per-location verification the
+            paragraph below disclaims. The heading now carries the same scope
+            the disclaimer does, worded to match it so the two cannot drift
+            apart again. The amenity list itself is untouched. */}
+        Good to know — La Parrilla generally
       </h2>
       <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
         {restaurant.amenities.map((amenity, i) => (

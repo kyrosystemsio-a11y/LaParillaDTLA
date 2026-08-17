@@ -4,6 +4,7 @@ import { restaurant } from "@/content/restaurant";
 import { images } from "@/content/images";
 import { social } from "@/content/social";
 import { Button } from "@/components/Button";
+import { StatusBadge } from "@/components/StatusBadge";
 import { getAnchorLocation, getVisibleLocations } from "@/content/locations";
 
 const CATERING_DESCRIPTION =
@@ -79,7 +80,17 @@ export default function CateringPage() {
       <div className="mt-16 grid gap-6 border-t border-ink/10 pt-10 sm:grid-cols-2">
         {locations.map((loc) => (
           <div key={loc.slug}>
-            <h2 className="font-display text-2xl text-ink">{loc.shortName}</h2>
+            <div className="flex flex-wrap items-center gap-3">
+              <h2 className="font-display text-2xl text-ink">{loc.shortName}</h2>
+              {/* This page was the only surface listing an 'unconfirmed'
+                  location with no qualification at all, which read as a
+                  vouched-for intake channel. The badge is the same component
+                  every other location listing uses, and it is driven by the
+                  same `status` flag — it asserts nothing about whether this
+                  location caters. Rendered only where there is uncertainty to
+                  show, so the anchor location's treatment is unchanged. */}
+              {loc.status !== "open" && <StatusBadge status={loc.status} />}
+            </div>
             <a href={`tel:${loc.phoneHref}`} className="mt-1 inline-block font-body text-ember hover:underline">
               {loc.phone}
             </a>

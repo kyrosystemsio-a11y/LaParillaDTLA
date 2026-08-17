@@ -26,8 +26,12 @@ export default function AboutPage() {
               La Parrilla started in Boyle Heights in {restaurant.founded.boyleHeights},
               cooking the food the family grew up on — mole, molcajetes, meat
               off the grill. It&apos;s still the same room, still the same
-              family, mariachi still coming through on a Friday night.
+              family, and the mariachi still come through.
             </p>
+            {/* No day is named here. The project records mariachi as a boolean
+                on the Boyle Heights location and nothing more — no day, time,
+                or frequency — so this matches the location page's "a regular
+                part of the room here" rather than out-running the data. */}
             <p>{restaurant.founded.note}</p>
             <p>
               Several dishes on the menu today are Mary Carmen Creations —

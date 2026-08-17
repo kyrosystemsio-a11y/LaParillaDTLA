@@ -35,16 +35,24 @@ export default function MenuPage() {
     <div>
       <div className="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
         <h1 className="font-display text-5xl text-ink sm:text-6xl">Menu</h1>
+        {/* Both the provenance sentence and the CTA below are gated on the same
+            flag `lib/schema.ts` already respects. While it is false we neither
+            send anyone to an ordering page we could not confirm resolves, nor
+            cite that page as the authority for the prices on this one. The
+            dine-in caveat is independent of the ordering source, so it stays
+            either way. Flip the flag and both return with no code change. */}
         <p className="mt-3 max-w-xl font-body text-ink/70">
-          Prices as listed for online ordering. Dine-in menus can vary
-          slightly by location — ask your server if you don&apos;t see
-          something you&apos;re after.
+          {restaurant.onlineOrderVerified && "Prices as listed for online ordering. "}
+          Dine-in menus can vary slightly by location — ask your server if you
+          don&apos;t see something you&apos;re after.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           {anchor && <Button href={`tel:${anchor.phoneHref}`}>Call for takeout</Button>}
-          <Button href={restaurant.onlineOrderUrl} variant="ghost">
-            Order online
-          </Button>
+          {restaurant.onlineOrderVerified && (
+            <Button href={restaurant.onlineOrderUrl} variant="ghost">
+              Order online
+            </Button>
+          )}
         </div>
       </div>
 
