@@ -6,9 +6,16 @@ each file is a labeled, abstract stand-in so the owner can swap in real
 photos without touching any component code.
 
 To replace a photo: drop a real file into this folder (JPEG or PNG
-recommended) at the same target dimensions, then update its `src` in
-`content/images.ts` to point at the new filename. That's the only file that
-needs to change — every page reads image paths from there.
+recommended) at the same target dimensions, then update **both its `src` and
+its `alt`** in `content/images.ts`. That's the only file that needs to change —
+every page reads image paths and alt text from there.
+
+Rewriting the `alt` is not optional. While a slot holds placeholder art its
+alt text says so — "Placeholder image for a photograph of …" — because that is
+what is actually on screen. Swap in a real photo without rewriting the alt and
+the site will describe a real photograph as a placeholder, which is just the
+old problem in reverse. Describe what the new photo actually shows; the
+Subject column below records what each shot is meant to be.
 
 | Slot key (in `content/images.ts`) | Current file | Subject | Target size (w×h) |
 |---|---|---|---|

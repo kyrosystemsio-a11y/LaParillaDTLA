@@ -1,6 +1,20 @@
 // Every image slot on the site, defined once here. Swap the `src` values for
 // real photography — see /public/images/README.md for the full shot list
 // and target dimensions.
+//
+// The `alt` strings below describe PLACEHOLDER ART, because that is what is
+// currently on screen. Every file in /public/images is generated abstract SVG
+// that renders the words "PHOTO PLACEHOLDER" on its face; the alt text used to
+// describe photographs that do not exist, so a sighted visitor saw a labelled
+// placeholder while a screen-reader user was told the room was strung with
+// papel picado. `next/image` renders these as <img alt="...">, which discards
+// each SVG's own aria-label, so alt is the only accessible name a placeholder
+// gets — and it was the only part of the system that was not honest.
+//
+// When a slot's `src` is swapped for real photography, ITS `alt` MUST BE
+// REWRITTEN in the same edit to describe the actual photograph. The intended
+// subject of each shot is recorded in /public/images/README.md; nothing here
+// invents what a future photograph will show.
 
 export interface ImageSlot {
   src: string;
@@ -12,73 +26,73 @@ export interface ImageSlot {
 export const images = {
   heroBoyleHeights: {
     src: "/images/hero-boyle-heights.svg",
-    alt: "The dining room at La Parrilla's original Boyle Heights location, strung with papel picado.",
+    alt: "Placeholder image for a photograph of the Boyle Heights dining room.",
     width: 1600,
     height: 2000,
   },
   heroWilshireBuilding: {
     src: "/images/wilshire-building.svg",
-    alt: "The 1905 wood-frame building on Wilshire Boulevard that has housed La Parrilla since 1996.",
+    alt: "Placeholder image for a photograph of the 1905 building at 1300 Wilshire.",
     width: 1600,
     height: 1200,
   },
   molcajete: {
     src: "/images/molcajete-pancho-villa.svg",
-    alt: "A stone molcajete of chicken, beef, shrimp, panela cheese, and cactus, served smoking hot.",
+    alt: "Placeholder image for a photograph of the Molcajete del Señor Pancho Villa.",
     width: 1200,
     height: 1200,
   },
   comal: {
     src: "/images/comal-tortillas.svg",
-    alt: "Handmade tortillas on the comal.",
+    alt: "Placeholder image for a photograph of handmade tortillas on the comal.",
     width: 1200,
     height: 1200,
   },
   brasero: {
     src: "/images/parrillada-brasero.svg",
-    alt: "A Parrilladas Brasero mixed grill for two, fresh off the fire.",
+    alt: "Placeholder image for a photograph of a Parrilladas Brasero mixed grill.",
     width: 1200,
     height: 1200,
   },
   chaplinWall: {
     src: "/images/chaplin-memorabilia.svg",
-    alt: "Charlie Chaplin photographs and memorabilia on the wall at the Wilshire location.",
+    alt: "Placeholder image for a photograph of the Chaplin memorabilia wall at the Wilshire location.",
     width: 1200,
     height: 1500,
   },
   mariachi: {
     src: "/images/mariachi-boyle-heights.svg",
-    alt: "Mariachi performing tableside at the Boyle Heights location.",
+    alt: "Placeholder image for a photograph of mariachi at the Boyle Heights location.",
     width: 1200,
     height: 1200,
   },
   guacamole: {
     src: "/images/guacamole.svg",
-    alt: "Fresh guacamole made to order.",
+    alt: "Placeholder image for a photograph of guacamole.",
     width: 1200,
     height: 1200,
   },
   bar: {
     src: "/images/bar-margaritas.svg",
-    alt: "The bar at La Parrilla, set for margaritas.",
+    alt: "Placeholder image for a photograph of the bar.",
     width: 1200,
     height: 1200,
   },
   exteriorBoyleHeights: {
     src: "/images/exterior-boyle-heights.svg",
-    alt: "The street-facing exterior of La Parrilla in Boyle Heights.",
+    alt: "Placeholder image for a photograph of the La Parrilla exterior in Boyle Heights.",
     width: 1200,
     height: 900,
   },
   exteriorWilshire: {
     src: "/images/exterior-wilshire.svg",
-    alt: "The exterior of the 1905 building at 1300 Wilshire Blvd.",
+    alt: "Placeholder image for a photograph of the exterior of the 1905 building at 1300 Wilshire Blvd.",
     width: 1200,
     height: 900,
   },
   cateringSpread: {
     src: "/images/catering-spread.svg",
-    alt: "A catering spread of tacos, rice, and beans.",
+    alt: "Placeholder image for a photograph of a catering spread.",
     width: 1200,
     height: 900,
   },

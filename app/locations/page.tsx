@@ -4,8 +4,14 @@ import { LocationCard } from "@/components/LocationCard";
 import { JsonLd } from "@/components/JsonLd";
 import { locationSchema } from "@/lib/schema";
 
+// This page does list both locations, so both are still named. What changed is
+// that it no longer reads as an invitation to turn up at either: "Find ... in"
+// implied two rooms with settled hours, while Wilshire's status is
+// 'unconfirmed'. The caution reuses wording already rendered on the home page
+// and on the Wilshire detail page rather than introducing a new claim. Revisit
+// if Wilshire's status in `content/locations.ts` ever changes.
 const LOCATIONS_DESCRIPTION =
-  "Find La Parrilla in Boyle Heights and on Wilshire in Los Angeles.";
+  "Addresses and phone numbers for La Parrilla in Los Angeles — Boyle Heights and Wilshire. Hours vary by location; call ahead before you go.";
 
 export const metadata: Metadata = {
   title: "Locations",

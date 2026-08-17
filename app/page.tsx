@@ -12,8 +12,12 @@ import { restaurant } from "@/content/restaurant";
 
 export const metadata: Metadata = {
   title: "La Parrilla — Mexican Restaurant in Los Angeles",
+  // Declared here, this overrides the root description — so correcting
+  // `content/site.ts` alone would have left the site's highest-traffic search
+  // snippet still naming two operating restaurants. Kept identical to the root
+  // string so the two near-duplicates cannot drift apart again.
   description:
-    "Family-owned since 1978. Molcajetes, parrilladas, and handmade tortillas in Boyle Heights and on Wilshire, Los Angeles.",
+    "Family-owned since 1978. Molcajetes, parrilladas, and handmade tortillas in Boyle Heights, Los Angeles.",
   alternates: { canonical: "/" },
 };
 
